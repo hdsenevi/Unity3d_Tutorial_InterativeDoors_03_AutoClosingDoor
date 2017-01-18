@@ -18,9 +18,9 @@ public class InteractiveObject : MonoBehaviour
 	{
 		m_State = eInteractiveState.Inactive;
 		
-		m_AnimNames = new string[animation.GetClipCount()];
+		m_AnimNames = new string[GetComponent<Animation>().GetClipCount()];
 		int index = 0;
-		foreach(AnimationState anim in animation)
+		foreach(AnimationState anim in GetComponent<Animation>())
 		{
 			m_AnimNames[index] = anim.name;
 			index++;
@@ -29,17 +29,17 @@ public class InteractiveObject : MonoBehaviour
 	
  	public void TriggerInteraction()
 	{
-		if(!animation.isPlaying)
+		if(!GetComponent<Animation>().isPlaying)
 			{
 			Debug.Log("Interactive object");
 			switch (m_State) 
 			{
 			case eInteractiveState.Active:
-				animation.Play(m_AnimNames[1]);
+				GetComponent<Animation>().Play(m_AnimNames[1]);
 				m_State = eInteractiveState.Inactive;
 				break;
 			case eInteractiveState.Inactive:
-				animation.Play(m_AnimNames[0]);
+				GetComponent<Animation>().Play(m_AnimNames[0]);
 				m_State = eInteractiveState.Active;
 				break;
 			default:
